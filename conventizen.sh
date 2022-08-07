@@ -54,7 +54,7 @@ function getTherapy () {
     elif [ $switch -eq 1 ] ; then
         echo "Commits the changed files to the GH repo using a simple conventional commit style."
         echo "Usage:"
-        echo "  bash conventizen.sh <commit_type> <scope (optional)>"
+        echo "  bash conventizen.sh [commit_type (required)] [scope (optional)]"
         echo "Accepted commit type arguments:"
         for type in "${TYPES[@]}"
         do
@@ -64,6 +64,12 @@ function getTherapy () {
 
     exit 1
 }
+
+
+# function mainProcess () {
+
+# }
+
 
 
 function main () {
@@ -87,11 +93,20 @@ function main () {
         elif [ "$matchedType" = "help" ] ; then
             getTherapy 1
         else
-            echo "Enter your commit message for the type $matchedType."
+            local scope=""
+
+            echo "Commit Type: $matchedType."
+            
+            if [ $len -eq 2 ] ; then
+                scope="(${PARAMS[1]})"
+                echo "Scope: ${PARAMS[1]}."
+            fi
+
+            echo "Enter your commit message:"
             read commitMsg
-            git commit -m "$matchedType: $commitMsg"
+
+            git commit -a -m "$matchedType$scope: $commitMsg"
         fi
-        
     fi
 }
 
