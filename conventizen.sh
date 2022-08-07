@@ -89,7 +89,7 @@ function main () {
         else
             echo "Enter your commit message for the type $matchedType."
             read commitMsg
-            git commit -m '$matchedType: $commitMsg'
+            git commit -m "$matchedType: $commitMsg"
         fi
         
     fi
