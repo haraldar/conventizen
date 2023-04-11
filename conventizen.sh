@@ -99,15 +99,15 @@ function main () {
         else
             local scope=""
 
-            echo "Commit Type: $matchedType."
+            # echo "Commit Type: $matchedType."
             
             # If a 2nd parameter has been submitted, treat is the scope.
             if [ $len -eq 2 ] ; then
                 scope="(${PARAMS[1]})"
-                echo "Scope: ${PARAMS[1]}."
+                # echo "Scope: ${PARAMS[1]}."
             fi
 
-            echo "Enter your commit message:"
+            echo -n "$matchedType$scope: "
             read commitMsg
 
             # Run the final git commit command.
